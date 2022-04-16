@@ -16,7 +16,7 @@ multi pbkdf2(blob8 $password, :&prf, Str :$salt, :$c, :$dkLen) {
   samewith $password, :&prf, :salt($salt.encode), :$c, :$dkLen
 }
 
-multi pbkdf2(blob8 $key, :&prf, :$salt, :$c, :$dkLen) {
+multi pbkdf2(blob8 $key, :&prf, blob8 :$salt, :$c, :$dkLen) {
   my $dgst-length = &prf("foo".encode, "bar".encode).elems;
   my $l = ($dkLen + $dgst-length - 1) div $dgst-length;
   .subbuf(0,$dkLen) given [~] gather for 1..$l -> $i {

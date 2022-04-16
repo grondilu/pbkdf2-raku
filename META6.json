@@ -1,0 +1,13 @@
+{
+  "perl": "6.d",
+  "name": "PBKDF2",
+  "description" : "PBKDF2 in pure raku",
+  "provides": {
+    "PBKDF2": "lib/PBKDF2.rakumod"
+  },
+  "license": "MIT-License",
+  "authors": [ "Lucien Grondin" ],
+  "depends": [ ],
+  "tags": [ "pbkdf2","crypto" ],
+  "version": "0.1.0"
+}

@@ -4,7 +4,7 @@ unit module PBKDF2;
 proto pbkdf2(
   $,
   :&prf,
-  blob8 :$salt,
+  :$salt,
   UInt :$c,
   UInt :$dkLen
 ) returns blob8 is export {*}
@@ -12,6 +12,10 @@ proto pbkdf2(
 multi pbkdf2(Str $password, :&prf, :$salt, :$c, :$dkLen) {
   samewith $password.encode, :&prf, :$salt, :$c, :$dkLen
 }
+multi pbkdf2(blob8 $password, :&prf, Str :$salt, :$c, :$dkLen) {
+  samewith $password, :&prf, :salt($salt.encode), :$c, :$dkLen
+}
+
 
 sub int_32_be(uint32 $i --> blob8) {
   blob8.new:

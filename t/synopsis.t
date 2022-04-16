@@ -6,7 +6,7 @@ use PBKDF2;
 use Digest;
 
 lives-ok { pbkdf2 "password",
-  :salt("salt".encode),
+  :salt("salt"),
   :prf({ md5($^a ~ $^b) }),
   :c(1096),
   :dkLen(32);

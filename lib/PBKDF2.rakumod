@@ -3,8 +3,8 @@ unit module PBKDF2;
 
 proto pbkdf2(
   $,
-  :&prf,
   :$salt,
+  :&prf,
   UInt :$c,
   UInt :$dkLen
 ) returns blob8 is export {*}
@@ -16,13 +16,7 @@ multi pbkdf2(blob8 $password, :&prf, Str :$salt, :$c, :$dkLen) {
   samewith $password, :&prf, :salt($salt.encode), :$c, :$dkLen
 }
 
-
 sub int_32_be(uint32 $i --> blob8) {
-  blob8.new:
-    $i +> 24 +& 0xff,
-    $i +> 16 +& 0xff,
-    $i +>  8 +& 0xff,
-    $i +>  0 +& 0xff
     ;
 }
  
@@ -32,8 +26,7 @@ multi pbkdf2(blob8 $key, :&prf, :$salt, :$c, :$dkLen) {
   .subbuf(0,$dkLen) given [~] gather for 1..$l -> $i {
     take reduce -> $a, $b {
       blob8.new: $a.list »+^« $b.list
-    }, (
-      buf8.new($salt ~ int_32_be($i)), {
+    }, (buf8.new($salt ~ blob8.new: (24, 16, 8, 0).map: { $i +> $_ +& 0xff }), {
 	$*ERR.printf("\rPBKFD2: bloc %d/%d, iteration %d/%d", $i, $l, ++$, $c);
 	prf($_, $key)
       } ... *

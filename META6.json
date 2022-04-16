@@ -8,6 +8,6 @@
   "license": "MIT-License",
   "authors": [ "Lucien Grondin" ],
   "depends": [ ],
-  "tags": [ "pbkdf2","crypto" ],
-  "version": "0.1.1"
+  "tags": [ "pbkdf2", "crypto" ],
+  "version": "0.1.2"
 }

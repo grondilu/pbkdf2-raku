@@ -9,7 +9,7 @@ use PBKDF2;
 use Digest;
 
 say pbkdf2 "password",
-  :salt("salt".encode),
+  :salt("salt"),
   :prf({ md5($^a ~ $^b) }),
   :c(10),
   :dkLen(32);

@@ -5,7 +5,7 @@
   "provides": {
     "PBKDF2": "lib/PBKDF2.rakumod"
   },
-  "license": "MIT-License",
+  "license": "MIT",
   "authors": [ "Lucien Grondin" ],
   "depends": [ ],
   "test-depends": [ "Digest" ],

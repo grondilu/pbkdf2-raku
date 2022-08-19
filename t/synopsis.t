@@ -7,7 +7,7 @@ use Digest;
 
 lives-ok { pbkdf2 "password",
   :salt("salt"),
-  :prf(&md5 ∘ &infix:<~>),
+  :prf(&md5 ∘ &[~]),
   :c(1096),
   :dkLen(32);
 }

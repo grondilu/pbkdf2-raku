@@ -10,7 +10,7 @@ use Digest;
 
 say pbkdf2 "password",
   :salt("salt"),
-  :prf(&md5 ∘ &infix:<~>),
+  :prf(&md5 ∘ &[~]),
   :c(10),
   :dkLen(32);
 ```

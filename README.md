@@ -6,7 +6,7 @@ PBKDF2 in pure raku.  Speed will mostly depend on the pseudo-random function use
 
 ```raku
 use PBKDF2;
-use Digest;
+use Digest::MD5;
 
 say pbkdf2 "password",
   :salt("salt"),

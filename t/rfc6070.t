@@ -3,15 +3,18 @@ use Test;
 plan 6;
 
 use PBKDF2;
+use Digest::HMAC:auth<grondilu>;
+use Digest::SHA1;
 
 sub hmac-sha1(blob8 $input, blob8 $salt) returns blob8 {
-  my Str $salt-hex = $salt».fmt("%02x").join;
-  given run |<openssl dgst -sha1 -mac hmac -macopt>, "hexkey:$salt-hex", '-binary',
-    :in, :out, :bin {
-    .in.write: $input;
-    .in.close;
-    return .out.slurp: :close;
-  }
+  hmac(key => $salt, msg => $input, hash => &sha1, block-size => 64);
+  #my Str $salt-hex = $salt».fmt("%02x").join;
+  #given run |<openssl dgst -sha1 -mac hmac -macopt>, "hexkey:$salt-hex", '-binary',
+  #  :in, :out, :bin {
+  #  .in.write: $input;
+  #  .in.close;
+  #  return .out.slurp: :close;
+  #}
 }
 
 is pbkdf2("password", :prf(&hmac-sha1), :salt("salt"), :c(1), :dkLen(20)),

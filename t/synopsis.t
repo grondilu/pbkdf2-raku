@@ -3,7 +3,7 @@ use Test;
 plan 1;
 
 use PBKDF2;
-use Digest;
+use Digest::MD5;
 
 lives-ok { pbkdf2 "password",
   :salt("salt"),

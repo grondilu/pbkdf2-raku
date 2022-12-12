@@ -4,9 +4,9 @@ plan 6;
 
 use PBKDF2;
 use Digest::HMAC:auth<grondilu>;
-use Digest::SHA1;
+use Digest::SHA1::Native;
 
-sub hmac-sha1(blob8 $input, blob8 $salt) returns blob8 {
+sub hmac-sha1(Blob $input, blob8 $salt) returns Blob {
   hmac(key => $salt, msg => $input, hash => &sha1, block-size => 64);
   #my Str $salt-hex = $salt».fmt("%02x").join;
   #given run |<openssl dgst -sha1 -mac hmac -macopt>, "hexkey:$salt-hex", '-binary',

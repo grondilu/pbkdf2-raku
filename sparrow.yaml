@@ -26,8 +26,8 @@ tasks:
     config:
       list:
         # - 2022.04
-        # - 2022.07
-        - 2022.12
+         - 2022.07
+        #- 2022.12
     code: |
       my @state;
       for config()<list><> -> $v {

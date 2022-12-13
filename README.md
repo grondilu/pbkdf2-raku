@@ -1,3 +1,5 @@
+[![SparrowCI](https://ci.sparrowhub.io/project/gh-grondilu-pbkdf2-raku/badge)](https://ci.sparrowhub.io)
+
 # pbkdf2-raku
 
 PBKDF2 in pure raku.  Speed will mostly depend on the pseudo-random function used.

@@ -4,7 +4,7 @@ plan 6;
 
 use PBKDF2;
 use Digest::HMAC:auth<grondilu>;
-use Digest::SHA1::Native;
+use Digest::SHA1;
 
 sub hmac-sha1(Blob $input, blob8 $salt) returns Blob {
   hmac(key => $salt, msg => $input, hash => &sha1, block-size => 64);

@@ -18,12 +18,13 @@ multi pbkdf2(blob8 $password, :&prf, Str :$salt, :$c, :$dkLen) {
 
 multi pbkdf2(blob8 $key, :&prf, blob8 :$salt, :$c, :$dkLen) {
   my $dgst-length = &prf("foo".encode, "bar".encode).elems;
-  my $l = ($dkLen + $dgst-length - 1) div $dgst-length;
-  ([~] do for 1..$l -> $i {
-    reduce { blob8.new: $^a.list »+^« $^b.list }, (
-      $salt ~ blob8.new((24, 16, 8, 0).map($i +> * +& 0xff)),
-      { &prf($_, $key) } ... *
-    )[1..$c];
-  }).subbuf(0,$dkLen) 
+  (
+    [~] map -> $i {
+	reduce { blob8.new: $^a.list »+^« $^b.list }, (
+	  $salt ~ blob8.new((24, 16, 8, 0).map($i +> * +& 0xff)),
+	  { &prf($_, $key) } ... *
+	)[1..$c];
+      }, 1..(($dkLen + $dgst-length - 1) div $dgst-length)
+  ).subbuf(0,$dkLen) 
 }
   

@@ -4,6 +4,7 @@ plan 6;
 
 use PBKDF2;
 use Digest::HMAC:auth<grondilu>;
+BEGIN %*ENV<DIGEST_METHOD> = 'openssl';
 use Digest::SHA1;
 
 sub hmac-sha1(Blob $input, blob8 $salt) returns Blob {

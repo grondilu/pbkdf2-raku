@@ -3,7 +3,7 @@ use Test;
 plan 6;
 
 use PBKDF2;
-use Digest::HMAC:auth<grondilu>;
+use HMAC;
 BEGIN %*ENV<DIGEST_METHOD> = 'openssl';
 use Digest::SHA1;
 

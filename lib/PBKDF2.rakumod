@@ -11,7 +11,7 @@ multi pbkdf2(blob8 $key, :&prf, blob8 :$salt, :$c, :$dkLen) {
     [\~] map -> $seed {
       reduce * ~^ *, (
 	$seed,
-	{ prf.assuming($_, $key) } ... *
+	{ prf($_, $key) } ... *
 	#&prf.assuming(*, $key) ... *
       )[1..$c];
     } o

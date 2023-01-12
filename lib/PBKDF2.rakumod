@@ -8,16 +8,11 @@ multi pbkdf2(blob8 $password, :&prf, Str :$salt, :$c, :$dkLen) { samewith $passw
 
 multi pbkdf2(blob8 $key, :&prf, blob8 :$salt, :$c, :$dkLen) {
   (
-    [\~] map -> $seed {
-      reduce * ~^ *, (
-	$seed,
-	{ prf($_, $key) } ... *
-	#&prf.assuming(*, $key) ... *
-      )[1..$c];
-    } o
-    { $salt ~ blob8.new(.polymod(256 xx 3).reverse) },
-    1..Inf
+    [\~] map {
+      reduce * ~^ *, 
+	($salt ~ blob8.new(.polymod(256 xx 3).reverse),
+	{ prf $_, $key } ... *)[1..$c]
+    }, 1..*
   ).first(*.elems ≥ $dkLen)
   .subbuf(0, $dkLen)
 }
-  

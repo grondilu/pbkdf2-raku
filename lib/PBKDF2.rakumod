@@ -9,7 +9,7 @@ multi pbkdf2(blob8 $password, :&prf, Str :$salt, :$c, :$dkLen) { samewith $passw
 multi pbkdf2(blob8 $key, :&prf, blob8 :$salt, :$c, :$dkLen) {
   (1..*)
   .map({
-    reduce * ~^ *,
+    reduce -> $a, $b? { $b.defined ?? $a ~^ $b !! $a },
       ($salt ~ blob8.new(.polymod(256 xx 3).reverse),
 	{ prf $_, $key } ... *)[1..$c]
   })

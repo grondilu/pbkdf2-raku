@@ -1,4 +1,4 @@
-[![SparrowCI](https://ci.sparrowhub.io/project/gh-grondilu-pbkdf2-raku/badge)](https://ci.sparrowhub.io)
+[![SparkyCI](https://sparky.sparrowhub.io/badge/gh-grondilu-pbkdf2-raku?foo=bar)](https://sparky.sparrowhub.io)
 
 # pbkdf2-raku
 
